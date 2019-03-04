@@ -4,7 +4,7 @@ from .models import *
 from django.core.paginator import Paginator,Page
 from django.http import HttpResponse
 from . import urls
-# from df_cart.models import *
+from df_cart.models import *
 
 def index(request):
     #查询各分类的最新4条、最热4条数据
@@ -29,7 +29,7 @@ def index(request):
              'type3': type3, 'type31': type31,
              'type4': type4, 'type41': type41,
              'type5': type5, 'type51': type51,
-             # 'cart_count':cart_count(request)
+             'cart_count':cart_count(request)
              }
     return render(request,'df_goods/index.html',context)
 
@@ -50,7 +50,7 @@ def list(request,tid,pindex,sort):
              'typeinfo':typeinfo,
              'sort':sort,
              'news':news,
-             # 'cart_count':cart_count(request)
+             'cart_count':cart_count(request)
              }
     return render(request,'df_goods/list.html',context)
 
@@ -83,11 +83,11 @@ def detail(request,id):
     return response
 
 # 购物车数量
-# def cart_count(request):
-#     if request.session.has_key('user_id'):
-#         return CartInfo.objects.filter(user_id=request.session['user_id']).count()
-#     else:
-#         return 0
+def cart_count(request):
+    if request.session.has_key('user_id'):
+        return CartInfo.objects.filter(user_id=request.session['user_id']).count()
+    else:
+        return 0
 
 from haystack.views import SearchView
 class MySearchView(SearchView):
