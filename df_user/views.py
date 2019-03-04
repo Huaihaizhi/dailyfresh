@@ -3,6 +3,7 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse,JsonResponse,HttpResponseRedirect
 from . import urls
 from .models import *
+from . import user_decorator
 from hashlib import sha1
 
 def register(request):
@@ -49,7 +50,7 @@ def login_handle(request):
         s1=sha1()
         s1.update(upwd.encode('utf8'))
         if s1.hexdigest()==users[0].upwd:
-            url=request.COOKIES.get('url','/user/info/')
+            url=request.COOKIES.get('url','/')
             red = HttpResponseRedirect(url)
             red.set_cookie('url','',max_age=-1)
             if jizhu!=0:
@@ -70,6 +71,8 @@ def logout(request):
     request.session.flush()
     return redirect('/')
 
+
+@user_decorator.login
 def info(request):
     user_email=UserInfo.objects.get(id=request.session['user_id']).uemail
     goods_list=[]
@@ -86,6 +89,7 @@ def info(request):
              'goods_list':goods_list}
     return render(request,'df_user/user_center_info.html',context)
 
+@user_decorator.login
 def order(request):#pindex
     # order_list=OrderInfo.objects.filter(user_id=request.session['user_id']).order_by('-oid')
     # paginator=Paginator(order_list,2)
@@ -99,7 +103,7 @@ def order(request):#pindex
     #          'page':page,}
     return render(request,'df_user/user_center_order.html')
 
-
+@user_decorator.login
 def site(request):
     user = UserInfo.objects.get(id=request.session['user_id'])
     if request.method=='POST':
