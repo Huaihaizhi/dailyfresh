@@ -24,7 +24,7 @@ def register_handle(request):
         return redirect('/user/register/')
     #密码加密
     s1=sha1()
-    s1.update(upwd)
+    s1.update(upwd.encode('utf-8'))
     upwd3=s1.hexdigest()
     #创建对象
     user=UserInfo()
@@ -57,7 +57,7 @@ def login_handle(request):
     #判断：如果未查到则用户名错，如果查到则判断密码是否正确，正确则转到用户中心
     if len(users)==1:
         s1=sha1()
-        s1.update(upwd)
+        s1.update(upwd.encode('utf-8'))
         if s1.hexdigest()==users[0].upwd:
             url=request.COOKIES.get('url','/')
             red = HttpResponseRedirect(url)
