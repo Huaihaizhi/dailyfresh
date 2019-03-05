@@ -60,7 +60,7 @@ def detail(request,id):
     goods.save()
 
     news=goods.gtype.goodsinfo_set.order_by('-id')[0:2]
-    context={'title':goods.gtype.ttitle,'guest_cart':1,
+    context={'title':goods.gtype.title,'guest_cart':1,
              'g':goods,'news':news,'id':id,
              'cart_count':cart_count(request)}
     response=render(request,'df_goods/detail.html',context)
@@ -96,6 +96,6 @@ class MySearchView(SearchView):
         context['title']= '搜索'
         context['guest_cart']=1
         context['cart_count']=cart_count(self.request)
-        return contextfrom
+        return context
 
 
