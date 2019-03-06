@@ -44,7 +44,7 @@ def list(request,tid,pindex,sort):
         goods_list=GoodsInfo.objects.filter(gtype_id=int(tid)).order_by('-gclick')
     paginator=Paginator(goods_list,10)
     page=paginator.page(int(pindex))
-    context={'title':typeinfo.ttitle,'guest_cart':1,
+    context={'title':typeinfo.title,'guest_cart':1,
              'page':page,
              'paginator':paginator,
              'typeinfo':typeinfo,

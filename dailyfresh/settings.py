@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'ov440pv8uzj(f22&4yjmyn=o0g@%1e-f_lurj$ahk=aao3w&xj'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -132,9 +132,9 @@ STATICFILES_DIRS=[
     os.path.join(BASE_DIR,'static')
 ]
 
-#MEDIA_ROOT=os.path.join(BASE_DIR,'static')
+MEDIA_ROOT=os.path.join(BASE_DIR,'static')
 
-MEDIA_ROOT='/var/www/dailyfresh/static'
+# MEDIA_ROOT='/var/www/dailyfresh/static'
 
 STATIC_ROOT='/var/www/dailyfresh/static/'
 STATIC_URL='/static/'
