@@ -132,9 +132,9 @@ STATICFILES_DIRS=[
     os.path.join(BASE_DIR,'static')
 ]
 
-MEDIA_ROOT=os.path.join(BASE_DIR,'static')
+#MEDIA_ROOT=os.path.join(BASE_DIR,'static')
 
-# MEDIA_ROOT='/var/www/dailyfresh/static'
+MEDIA_ROOT='/var/www/dailyfresh/static'
 
 STATIC_ROOT='/var/www/dailyfresh/static/'
 STATIC_URL='/static/'
